@@ -48,7 +48,8 @@
     </script>
 </head>
 <body>
-    <main class="hero">
+    <div class="scroll-container">
+        <main class="hero section-panel">
         <div class="container">
             <div class="hero-content">
                 <!-- Logo -->
@@ -61,46 +62,233 @@
                 
                 <!-- Headline -->
                 <h2 class="hero-headline">
-                    <span class="text-light">Turn your negative reviews</span><br>
-                    <span class="text-muted text-bold">into</span> <span class="text-accent text-bold">a money-making machine!</span>
+                    The only platform hospitality businesses need<br>
+                    <span class="text-accent">for feedback analysis!</span>
                 </h2>
                 
-                <!-- Subheading -->
-                <p class="hero-subheading">
-                    Stop guessing what's wrong with your business. Your customer reviews have all the answers!
-                </p>
+                <!-- CTA Buttons -->
+                <div class="hero-actions">
+                    <a href="#waitlist" class="btn btn-primary">
+                        Request Access
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                    <a href="#ai-recommendations" class="btn btn-outline">
+                        How it works
+                    </a>
+                </div>
+                
+                <!-- Platform Logos -->
+                <div class="platform-logos">
+                    <img src="./assets/imgs/expedia.png" alt="Expedia" class="platform-logo">
+                    <img src="./assets/imgs/google-maps.png" alt="Google Maps" class="platform-logo">
+                    <img src="./assets/imgs/booking.svg" alt="Booking.com" class="platform-logo">
+                    <img src="./assets/imgs/tripadvisor.png" alt="TripAdvisor" class="platform-logo">
+                    <img src="./assets/imgs/trustpilot-2.svg" alt="Trustpilot" class="platform-logo">
+                    <img src="./assets/imgs/yelp.png" alt="Yelp" class="platform-logo">
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Features Section -->
+    <section class="features section section-panel">
+        <div class="container">
+            <div class="features-grid">
+                <!-- Left Column - Text Content -->
+                <div class="features-content">
+                    <h2 class="features-title">
+                        Turn Customer Feedback<br>
+                        Into <span class="highlight-box">Growth Strategy</span>
+                    </h2>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="search"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Spot Hidden Patterns</h3>
+                                <p>Find problems before they become reputation disasters</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Prioritize by Impact</h3>
+                                <p>Focus on fixes that drive the most revenue</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="megaphone"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Act on Real Data</h3>
+                                <p>Focus on fixes that drive the most revenue</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="target"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Track Improvement</h3>
+                                <p>Measure if your changes actually work</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Graphs Image -->
+                <div class="features-visual">
+                    <img src="./assets/imgs/graph.png" alt="Analytics Dashboard showing sentiment distribution, issues impacting revenue, and rating trends" class="graphs-image">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- AI Recommendations Section -->
+    <section id="ai-recommendations" class="ai-recommendations section section-panel">
+        <div class="container">
+            <div class="recommendations-content">
+                <h2 class="recommendations-title">
+                    <span class="highlight-box-actionable">Actionable</span> AI Recommendations
+                </h2>
+                
+                <div class="recommendations-grid">
+                    <!-- Marketing Opportunities Card -->
+                    <div class="recommendation-card">
+                        <h3 class="card-title">Marketing Opportunities</h3>
+                        <p class="card-description">
+                            32 reviews mention the chilly pancakes dish
+                        </p>
+                        <span class="tag tag-signature">Signature Dish</span>
+                        
+                        <div class="actions-box">
+                            <div class="actions-header">
+                                <i data-lucide="lightbulb"></i>
+                                <span>Actions</span>
+                            </div>
+                            <ul class="actions-list">
+                                <li>Feature as hero image on homepage, create Instagram Reels showing preparation process, add chef's backstory to menu description, train servers to recommend with 'customer favorite since 2023' pitch</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="resources-box">
+                            <p class="resources-text">
+                                <strong>Resources:</strong> €500 photography budget and 8 hours content creation
+                            </p>
+                        </div>
+                        
+                        <div class="metrics-row">
+                            <div class="metric">
+                                <i data-lucide="users"></i>
+                                <span>Based on current volume, expect a ROI of 20% increase</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Wins Card -->
+                    <div class="recommendation-card">
+                        <h3 class="card-title">Quick Wins</h3>
+                        <p class="card-description">
+                            45 reviews mentioning high prices, indicating significant customer resistance
+                        </p>
+                        <div class="tags-row">
+                            <span class="tag tag-pricing">Pricing</span>
+                            <span class="tag tag-severity">Severity: 85%</span>
+                        </div>
+                        
+                        <div class="actions-box recovery-actions">
+                            <div class="actions-header">
+                                <i data-lucide="lightbulb"></i>
+                                <span>Recovery Actions</span>
+                            </div>
+                            <ul class="actions-list">
+                                <li>Launch early-bird dinner specials (5-8pm, 15% off), highlight premium ingredient sourcing on menu descriptions, create value lunch combos under €15</li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="metrics-row">
+                            <div class="metric">
+                                <i data-lucide="clock"></i>
+                                <span>2 weeks</span>
+                            </div>
+                            <div class="metric">
+                                <i data-lucide="trending-up"></i>
+                                <span>25% improvement in value perception</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- And More Section -->
+                    <div class="more-section">
+                        <p class="more-text">And more....</p>
+                        <img src="./assets/imgs/curley-arrow.png" alt="Arrow" class="curly-arrow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Waitlist Section -->
+    <section id="waitlist" class="waitlist section section-panel">
+        <div class="container">
+            <div class="waitlist-content">
+                <h2 class="waitlist-title">
+                    <span class="highlight-box-join">Join</span> the waitlist and request your seat
+                </h2>
                 
                 <!-- Email Form -->
-                <form class="signup-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <form class="waitlist-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                     <!-- Honeypot for spam protection -->
                     <p class="hidden">
                         <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                     </p>
                     
-                    <div class="form-row">
+                    <div class="waitlist-form-container">
                         <input 
                             type="email" 
                             name="email" 
                             placeholder="Email" 
                             required
-                            class="email-input"
+                            class="waitlist-email-input"
                             aria-label="Email address"
                         >
-                        <button type="submit" class="btn-submit">
-                            Sign up
+                        <button type="submit" class="waitlist-btn-submit">
+                            Join The Waitlist
                             <i data-lucide="arrow-right"></i>
                         </button>
                     </div>
                 </form>
                 
-                <!-- Launch Notice -->
-                <p class="launch-notice">
-                    Get notified when we launch
-                    <i data-lucide="rocket" class="rocket-icon"></i>
-                </p>
+                <!-- Benefits Section -->
+                <div class="waitlist-benefits">
+                    <p class="benefits-intro">By joining the waitlist, you get...</p>
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <i data-lucide="check-circle" class="benefit-icon"></i>
+                            <span>Early Access Seat</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i data-lucide="check-circle" class="benefit-icon"></i>
+                            <span>Priority Support</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i data-lucide="check-circle" class="benefit-icon"></i>
+                            <span>Early Access To New Features</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
+    </section>
 
     <!-- Hidden form for Netlify detection -->
     <form name="early-access" netlify netlify-honeypot="bot-field" hidden>
@@ -111,5 +299,6 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="assets/js/main.js" defer></script>
+    </div> <!-- End scroll-container -->
 </body>
 </html>

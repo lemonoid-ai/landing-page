@@ -2,10 +2,136 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Lucide icons
     lucide.createIcons();
     
+    // Fullscreen scroll behavior (desktop only)
+    let currentSection = 0;
+    const sections = document.querySelectorAll('.section-panel');
+    const scrollContainer = document.querySelector('.scroll-container');
+    let canScroll = true;
+    let scrollAccumulator = 0;
+    let scrollTimeout;
+    const SCROLL_THRESHOLD = 100; // Minimum accumulated scroll to trigger section change
+    const SCROLL_RESET_DELAY = 150; // Time to reset accumulator if no scroll events
+    
+    // Check if device is mobile
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    
+    // Handle mouse wheel scrolling with accumulation (desktop only)
+    if (!isMobile) {
+        window.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // If can't scroll, ignore everything
+            if (!canScroll) return;
+            
+            // Accumulate scroll delta
+            scrollAccumulator += Math.abs(e.deltaY);
+            
+            // Clear existing timeout
+            clearTimeout(scrollTimeout);
+            
+            // Set timeout to reset accumulator if no more scroll events
+            scrollTimeout = setTimeout(() => {
+                scrollAccumulator = 0;
+            }, SCROLL_RESET_DELAY);
+            
+            // Only trigger section change if we've accumulated enough scroll
+            if (scrollAccumulator >= SCROLL_THRESHOLD) {
+                canScroll = false; // Block further scrolls
+                scrollAccumulator = 0; // Reset accumulator
+                clearTimeout(scrollTimeout);
+                
+                const delta = e.deltaY;
+                
+                if (delta > 0 && currentSection < sections.length - 1) {
+                    // Scroll down
+                    currentSection++;
+                    scrollToSection(currentSection);
+                } else if (delta < 0 && currentSection > 0) {
+                    // Scroll up
+                    currentSection--;
+                    scrollToSection(currentSection);
+                } else {
+                    // If we can't scroll in that direction, re-enable scrolling
+                    canScroll = true;
+                }
+            }
+        }, { passive: false });
+    }
+    
+    // Handle touch scrolling and keyboard navigation (desktop only)
+    if (!isMobile) {
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        window.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        window.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            if (!canScroll) return;
+            
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                canScroll = false; // Block further scrolls
+                
+                if (diff > 0 && currentSection < sections.length - 1) {
+                    // Swipe up (scroll down)
+                    currentSection++;
+                    scrollToSection(currentSection);
+                } else if (diff < 0 && currentSection > 0) {
+                    // Swipe down (scroll up)
+                    currentSection--;
+                    scrollToSection(currentSection);
+                } else {
+                    // If we can't scroll in that direction, re-enable scrolling
+                    canScroll = true;
+                }
+            }
+        }
+        
+        // Handle keyboard navigation (desktop only)
+        window.addEventListener('keydown', function(e) {
+            if (!canScroll) return;
+            
+            if ((e.key === 'ArrowDown' || e.key === 'PageDown') && currentSection < sections.length - 1) {
+                canScroll = false;
+                currentSection++;
+                scrollToSection(currentSection);
+            } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentSection > 0) {
+                canScroll = false;
+                currentSection--;
+                scrollToSection(currentSection);
+            }
+        });
+    }
+    
+    // Scroll to section function
+    function scrollToSection(index) {
+        if (index < 0 || index >= sections.length) return;
+        
+        const targetSection = sections[index];
+        
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Re-enable scrolling after animation completes
+        setTimeout(() => {
+            canScroll = true;
+        }, 1000); // Wait for animation to complete
+    }
+    
+    
     // Form handling
-    const form = document.querySelector('.signup-form');
-    const emailInput = form.querySelector('.email-input');
-    const submitBtn = form.querySelector('.btn-submit');
+    const form = document.querySelector('.waitlist-form') || document.querySelector('.signup-form');
+    const emailInput = form.querySelector('.waitlist-email-input') || form.querySelector('.email-input');
+    const submitBtn = form.querySelector('.waitlist-btn-submit') || form.querySelector('.btn-submit');
     const originalBtnText = submitBtn.innerHTML;
     
     // Email validation
@@ -171,8 +297,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Auto-focus email input on page load (optional UX enhancement)
-    setTimeout(() => {
-        emailInput.focus();
-    }, 500);
+    // Smooth scrolling for anchor links (updated for section panels)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                // Find the index of the target section
+                const targetIndex = Array.from(sections).findIndex(section => 
+                    section.contains(targetSection) || section.id === targetId
+                );
+                
+                if (targetIndex !== -1) {
+                    currentSection = targetIndex;
+                    scrollToSection(currentSection);
+                }
+            }
+        });
+    });
 });
